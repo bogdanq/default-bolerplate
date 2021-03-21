@@ -1,0 +1,14 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "modules": false,
+        "loose": true
+      }
+    ],
+    "@babel/preset-react"
+  ],
+  // для того, что бы использовать експерементальный синтаксис классов
+  "plugins": ["@babel/plugin-proposal-class-properties"]
+}
