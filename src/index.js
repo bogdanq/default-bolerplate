@@ -1,17 +1,28 @@
-import "./index.css"
-
+// import { Test } from "@components/app"
 import React from "react"
 import ReactDOM from "react-dom"
-import { Test } from "./app"
-import styles from "./index.module.css"
+// import styles from "./index.module.css"
 
-const App = () => {
+import "./index.css"
+
+const messages = ["Hello"]
+
+const Messages = () => {
   return (
-    <div className="app">
-      <div className={styles.app}>App component</div>
-      <Test />
+    <div>
+      <h1>messages</h1>
+      {messages.map((message) => (
+        <p key={messages}>{message}</p>
+      ))}
+      <input placeholder="Введите сообщение" />
+      <button>Отправить</button>
     </div>
   )
 }
 
-ReactDOM.render(<App />, document.querySelector("#root"))
+ReactDOM.render(
+  <>
+    <Messages title="title" />
+  </>,
+  document.querySelector("#root"),
+)

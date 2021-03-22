@@ -1,17 +1,17 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
-const OptimizeCssAssetWebpackPlugin = require("optimize-css-assets-webpack-plugin");
-const TerserWebpackPlugin = require("terser-webpack-plugin");
-const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+const path = require("path")
+const HtmlWebpackPlugin = require("html-webpack-plugin")
+const { CleanWebpackPlugin } = require("clean-webpack-plugin")
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const CopyWebpackPlugin = require("copy-webpack-plugin")
+const OptimizeCssAssetWebpackPlugin = require("optimize-css-assets-webpack-plugin")
+const TerserWebpackPlugin = require("terser-webpack-plugin")
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin")
 
-const isDevelopment = process.env.NODE_ENV === "development";
+const isDevelopment = process.env.NODE_ENV === "development"
 
 const getFileNameByEnv = (ext = "[ext]", name = "[name]") => {
-  return isDevelopment ? `${name}.${ext}` : `${name}.[contenthash].${ext}`;
-};
+  return isDevelopment ? `${name}.${ext}` : `${name}.[contenthash].${ext}`
+}
 
 module.exports = {
   mode: process.env.NODE_ENV || "development",
@@ -25,34 +25,10 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
   },
   optimization: isDevelopment
-    ? {
-        splitChunks: {
-          // если есть повторения файлов - выносит
-          chunks: "all",
-        },
-      }
+    ? {}
     : {
         minimize: true,
-        minimizer: [
-          new OptimizeCssAssetWebpackPlugin(),
-          new TerserWebpackPlugin({
-            test: /\.js(\?.*)?$/i,
-            exclude: /node_modules/,
-            parallel: 4,
-            extractComments: !isDevelopment,
-            terserOptions: {
-              output: {
-                comments: /@license/i,
-              },
-            },
-          }),
-        ],
-        removeAvailableModules: false,
-        removeEmptyChunks: false,
-        splitChunks: {
-          // если есть повторения файлов - выносит
-          chunks: "all",
-        },
+        minimizer: [new OptimizeCssAssetWebpackPlugin()],
       },
   plugins: [
     new HtmlWebpackPlugin({
@@ -73,6 +49,7 @@ module.exports = {
     }),
     new CleanWebpackPlugin(),
     new CopyWebpackPlugin({
+      // просто скопирует код из папки в папку без изменений
       patterns: [
         {
           from: path.resolve(__dirname, "src/assets"),
@@ -133,7 +110,8 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           isDevelopment
-            ? "style-loader"
+            ? // Creates `style` nodes from JS strings
+              "style-loader"
             : {
                 loader: MiniCssExtractPlugin.loader,
                 options: {
@@ -141,6 +119,7 @@ module.exports = {
                 },
               },
           {
+            // Translates CSS into CommonJS
             loader: "css-loader",
             options: {
               sourceMap: isDevelopment,
@@ -200,4 +179,4 @@ module.exports = {
   },
   devtool: !isDevelopment ? false : "source-map",
   stats: "errors-only",
-};
+}

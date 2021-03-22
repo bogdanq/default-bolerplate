@@ -12,7 +12,7 @@ module.exports = {
     sourceType: "module",
   },
   parser: "babel-eslint",
-  plugins: ["react", "react-hooks", "jsdoc", "import", "prettier"],
+  plugins: ["react", "react-hooks", "import", "prettier"],
   extends: ["eslint:recommended", "plugin:react/recommended", "prettier"],
   rules: {
     // ESLINT RULES
@@ -73,12 +73,6 @@ module.exports = {
       },
     ],
 
-    // ESLINT-PLUGIN-JSDOC
-    // https://github.com/gajus/eslint-plugin-jsdoc/tree/master/src/rules
-    "jsdoc/check-alignment": "error",
-    "jsdoc/check-indentation": "error",
-    "jsdoc/newline-after-description": "error",
-
     // ESLINT-PLUGIN-REACT
     // https://github.com/yannickcr/eslint-plugin-react/tree/master/docs/rules
     "react/display-name": "off",
@@ -111,7 +105,6 @@ module.exports = {
       },
     ],
     "react/self-closing-comp": "error",
-
     // REACT-HOOKS
     // https://github.com/facebook/react/tree/master/packages/eslint-plugin-react-hooks
     "react-hooks/rules-of-hooks": "warn", // TODO: FIX, WAS 7 ERRORS

@@ -7,8 +7,7 @@
     "build": "cross-env NODE_ENV=production webpack",
     "dev": "cross-env NODE_ENV=development webpack",
     "start": "cross-env NODE_ENV=development webpack serve",
-    "eslint:write": "eslint --fix",
-    "prettier:write": "prettier --write"
+    "eslint:write": "eslint --fix"
   },
   "keywords": [],
   "author": "",
@@ -28,7 +27,6 @@
     "eslint": "^7.22.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsdoc": "^32.3.0",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
