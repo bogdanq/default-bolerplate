@@ -60,10 +60,13 @@ export class MessageList extends Component {
     const { messages, value } = this.state
 
     return (
-      <div>
-        {messages.map((message, index) => (
-          <Message message={message} key={index} />
-        ))}
+      <>
+        <div>
+          {messages.map((message, index) => (
+            <Message message={message} key={index} />
+          ))}
+        </div>
+
         <StyledInput
           fullWidth={true}
           value={value}
@@ -83,7 +86,7 @@ export class MessageList extends Component {
             </InputAdornment>
           }
         />
-      </div>
+      </>
     )
   }
 }
