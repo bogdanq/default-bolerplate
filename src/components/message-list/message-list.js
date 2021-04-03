@@ -1,6 +1,6 @@
 import { Input, withStyles, InputAdornment } from "@material-ui/core"
 import { Send } from "@material-ui/icons"
-import React, { Component } from "react"
+import React, { Component, createRef } from "react"
 
 import { Message } from "./message"
 import styles from "./message-list.module.css"
@@ -23,6 +23,8 @@ export class MessageList extends Component {
     value: "",
   }
 
+  ref = createRef()
+
   sendMessage = ({ author, value }) => {
     const { messages } = this.state
 
@@ -44,6 +46,12 @@ export class MessageList extends Component {
     }
   }
 
+  handleScrollBottom = () => {
+    if (this.ref.current) {
+      this.ref.current.scrollTo(0, this.ref.current.scrollHeight)
+    }
+  }
+
   componentDidUpdate(_, state) {
     const { messages } = this.state
 
@@ -54,6 +62,8 @@ export class MessageList extends Component {
         this.sendMessage({ author: "bot", value: "Как дела ?" })
       }, 500)
     }
+
+    this.handleScrollBottom()
   }
 
   render() {
@@ -61,7 +71,7 @@ export class MessageList extends Component {
 
     return (
       <>
-        <div>
+        <div ref={this.ref}>
           {messages.map((message, index) => (
             <Message message={message} key={index} />
           ))}

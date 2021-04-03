@@ -24,6 +24,7 @@ export class Message extends Component {
       >
         <h3>{value}</h3>
         <p>{author}</p>
+        {/* @TODO use date-fns */}
         <p>12.03</p>
       </div>
     )

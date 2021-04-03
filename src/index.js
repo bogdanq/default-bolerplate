@@ -1,8 +1,8 @@
 import { ThemeProvider, createMuiTheme } from "@material-ui/core"
 import React from "react"
 import ReactDOM from "react-dom"
-import { MessageList, Layout, ChatList, Header } from "./components"
-
+import { BrowserRouter, Switch, Route } from "react-router-dom"
+import { ChatPage } from "./pages/chat"
 import "./index.css"
 
 const dark = {
@@ -12,12 +12,13 @@ const dark = {
 const theme = createMuiTheme(dark)
 
 ReactDOM.render(
-  <ThemeProvider theme={theme}>
-    <Layout
-      header={<Header />}
-      chats={<ChatList />}
-      messages={<MessageList />}
-    />
-  </ThemeProvider>,
+  <BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <Switch>
+        <Route path="/chat" component={(params) => <ChatPage {...params} />} />
+        <Route path="*" component={() => <h1>404</h1>} />
+      </Switch>
+    </ThemeProvider>
+  </BrowserRouter>,
   document.getElementById("root"),
 )

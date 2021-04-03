@@ -21,22 +21,18 @@ const StyledListItem = withStyles(() => ({
   },
 }))(ListItem)
 
+// @TODO* доработать и сделать вывод последнего сообщения
 export class Chat extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
     selected: PropTypes.bool.isRequired,
-    handleListItemClick: PropTypes.func.isRequired,
   }
 
   render() {
-    const { handleListItemClick, selected, title } = this.props
+    const { selected, title } = this.props
 
     return (
-      <StyledListItem
-        button={true}
-        selected={selected}
-        onClick={handleListItemClick}
-      >
+      <StyledListItem button={true} selected={selected}>
         <ListItemIcon>
           <AccountCircle fontSize="large" className={styles.icon} />
         </ListItemIcon>
