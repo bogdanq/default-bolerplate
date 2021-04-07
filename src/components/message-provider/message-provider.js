@@ -1,12 +1,6 @@
-import PropTypes from "prop-types"
 import { Component } from "react"
 
 export class MessageProvider extends Component {
-  static propTypes = {
-    children: PropTypes.func.isRequired,
-    match: PropTypes.any,
-  }
-
   state = {
     conversations: [
       {
@@ -25,9 +19,49 @@ export class MessageProvider extends Component {
     },
   }
 
-  // @TODO
-  handleChangeValue() {}
-  sendMessage() {}
+  handleChangeValue = (value) => {
+    const {
+      match: { params },
+    } = this.props
+
+    this.setState({
+      conversations: this.state.conversations.map((conversation) => {
+        if (conversation.title === params.id) {
+          return { ...conversation, value }
+        }
+
+        return conversation
+      }),
+    })
+  }
+
+  sendMessage = ({ author, message }) => {
+    if (!message) {
+      return
+    }
+
+    const {
+      match: { params },
+    } = this.props
+
+    const newMessage = { author, message, createdTs: new Date() }
+
+    this.setState({
+      conversations: this.state.conversations.map((conversation) => {
+        if (conversation.title === params.id) {
+          return { ...conversation, lastMessage: newMessage, value: "" }
+        }
+
+        return conversation
+      }),
+      messages: {
+        ...this.state.messages,
+        [params.id]: [...(this.state.messages[params.id] || []), newMessage],
+      },
+    })
+  }
+
+  componentDidUpdate() {}
 
   render() {
     const { children, match } = this.props
@@ -43,7 +77,10 @@ export class MessageProvider extends Component {
           ?.value || "",
     }
 
-    const actions = {}
+    const actions = {
+      handleChangeValue: this.handleChangeValue,
+      sendMessage: this.sendMessage,
+    }
 
     return children([state, actions])
   }

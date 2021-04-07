@@ -15,6 +15,7 @@ module.exports = {
   plugins: ["react", "react-hooks", "import", "prettier"],
   extends: ["eslint:recommended", "plugin:react/recommended", "prettier"],
   rules: {
+    "react/prop-types": "off",
     // ESLINT RULES
     // https://eslint.org/docs/rules/
     "no-useless-catch": "warn", // TODO: FIX, WAS 8 ERRORS
