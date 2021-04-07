@@ -1,14 +1,7 @@
-import PropTypes from "prop-types"
 import React, { Component } from "react"
 import styles from "./layout.module.css"
 
 export class Layout extends Component {
-  static propTypes = {
-    header: PropTypes.node.isRequired,
-    chats: PropTypes.node.isRequired,
-    children: PropTypes.node.isRequired,
-  }
-
   render() {
     const { header, chats, children } = this.props
 

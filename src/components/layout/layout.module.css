@@ -28,10 +28,14 @@
 }
 
 .chats {
-  overflow-y: auto;
   width: 20%;
+}
+
+.chats > div {
+  overflow-y: auto;
   background-color: #17212b;
   border-right: 1px solid #000;
+  height: 95%;
 }
 
 .messages {
@@ -49,7 +53,7 @@
 }
 
 .messages > div:nth-child(2) {
-  height: 50px;
+  height: 37px;
   flex: none;
   background-color: #17212b;
 }

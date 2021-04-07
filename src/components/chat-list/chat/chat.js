@@ -5,7 +5,6 @@ import {
   withStyles,
 } from "@material-ui/core"
 import { AccountCircle } from "@material-ui/icons"
-import PropTypes from "prop-types"
 import React, { Component } from "react"
 
 import styles from "./chat.module.css"
@@ -23,13 +22,9 @@ const StyledListItem = withStyles(() => ({
 
 // @TODO* доработать и сделать вывод последнего сообщения
 export class Chat extends Component {
-  static propTypes = {
-    title: PropTypes.string.isRequired,
-    selected: PropTypes.bool.isRequired,
-  }
-
   render() {
-    const { selected, title } = this.props
+    const { selected, chat } = this.props
+    const { title } = chat
 
     return (
       <StyledListItem button={true} selected={selected}>

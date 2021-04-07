@@ -11,6 +11,6 @@
   width: 100%;
 }
 
-.description .text:last-child {
+.description .text:nth-child(3) {
   text-align: right;
 }
