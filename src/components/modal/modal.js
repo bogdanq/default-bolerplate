@@ -4,7 +4,7 @@ import styles from "./modal.module.css"
 
 const contacts = Array.from({ length: 50 }, (_, i) => `room${i}`)
 
-export const AddContactModalView = ({ isOpen, onClose }) => {
+export const AddContactModal = ({ isOpen, onClose }) => {
   return (
     <ModalBase open={isOpen} onClose={onClose}>
       <div className={styles.wrapper}>

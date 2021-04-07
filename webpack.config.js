@@ -22,6 +22,7 @@ module.exports = {
     // разбить код на файлы
     filename: getFileNameByEnv("js"),
     path: path.resolve(__dirname, "dist"),
+    publicPath: "/",
   },
   optimization: isDevelopment
     ? {}

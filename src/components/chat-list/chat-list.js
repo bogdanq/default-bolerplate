@@ -20,7 +20,7 @@ export class ChatListView extends Component {
   render() {
     const { conversations, match } = this.props
     const { isOpen } = this.state
-    const { id } = match?.params
+    const { id } = match.params
 
     return (
       <>
@@ -37,11 +37,7 @@ export class ChatListView extends Component {
           </List>
         </div>
 
-        <AddContactModal
-          conversations={conversations}
-          isOpen={isOpen}
-          onClose={this.toggleModal}
-        />
+        <AddContactModal isOpen={isOpen} onClose={this.toggleModal} />
 
         <Button variant="contained" fullWidth={true} onClick={this.toggleModal}>
           Добавить чат

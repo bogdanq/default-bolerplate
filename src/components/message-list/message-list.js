@@ -63,7 +63,7 @@ export class MessageListView extends Component {
         <StyledInput
           fullWidth={true}
           value={value}
-          onChange={(e) => this.props.handleChangeValue(e.target.value)}
+          // onChange={(e) => this.props.handleChangeValue(e.target.value)} @TODO заменить на екшен
           onKeyPress={this.handlePressInput}
           placeholder="Введите сообщение..."
           endAdornment={
