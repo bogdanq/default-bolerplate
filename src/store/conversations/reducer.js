@@ -1,4 +1,4 @@
-import { ADD_CONVERSATION } from "./types"
+import { ADD_CONVERSATION, CHANGE_VALUE } from "./types"
 
 const initialState = [
   { title: "room1", value: "" },
@@ -6,14 +6,20 @@ const initialState = [
   { title: "room3", value: "" },
 ]
 
-export const conversationsReducer = (state = initialState, action) => {
-  switch (action.type) {
+export const conversationsReducer = (
+  state = initialState,
+  { type, payload },
+) => {
+  switch (type) {
     case ADD_CONVERSATION:
-      return [...state, { title: action.payload, value: "" }]
-
-    // @TODO добавить CHANGE_VALUE type
-
+      return [...state, { title: payload, value: "" }]
+    case CHANGE_VALUE:
+      return state.map((room) =>
+        room.title === payload.id ? { ...room, value: payload.value } : room,
+      )
     default:
       return state
   }
 }
+
+// @TODO реагировать удаления комнаты

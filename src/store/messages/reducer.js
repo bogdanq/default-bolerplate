@@ -25,3 +25,10 @@ export const messagesReducer = (state = initialState, { type, payload }) => {
       return state
   }
 }
+
+// @TODO реагировать удаления комнаты
+
+// @TODO * сделть функцию createReducer
+// const reducer = createReducer(initialState, {
+//   [MESSAGE_SEND]: (state, action) => ({})
+// })

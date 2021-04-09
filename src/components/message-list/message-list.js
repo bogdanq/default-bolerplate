@@ -2,7 +2,7 @@ import { Input, withStyles, InputAdornment } from "@material-ui/core"
 import { Send } from "@material-ui/icons"
 import React, { Component, createRef } from "react"
 import { connect } from "react-redux"
-import { sendMessage } from "../../store"
+import { sendMessage, changeValue } from "../../store"
 import { Message } from "./message"
 import styles from "./message-list.module.css"
 import { MessagesNotFound } from "./messages-not-found"
@@ -28,11 +28,20 @@ export class MessageListView extends Component {
     }
   }
 
+  handleChangeInput = (event) => {
+    const { changeValue, match } = this.props
+    const { id } = match.params
+
+    changeValue(id, event?.target.value || "")
+  }
+
   handleSendMessage = () => {
     const { sendMessage, value, match } = this.props
     const { id } = match.params
 
     sendMessage({ author: "User", message: value, roomId: id })
+
+    this.handleChangeInput()
   }
 
   handleScrollBottom = () => {
@@ -63,18 +72,18 @@ export class MessageListView extends Component {
         <StyledInput
           fullWidth={true}
           value={value}
-          // onChange={(e) => this.props.handleChangeValue(e.target.value)} @TODO заменить на екшен
+          onChange={this.handleChangeInput}
           onKeyPress={this.handlePressInput}
           placeholder="Введите сообщение..."
           endAdornment={
-            <InputAdornment position="end">
-              {value && (
+            value && (
+              <InputAdornment position="end">
                 <Send
                   className={styles.icon}
                   onClick={this.handleSendMessage}
                 />
-              )}
-            </InputAdornment>
+              </InputAdornment>
+            )
           }
         />
       </>
@@ -87,13 +96,16 @@ const mapStateToProps = (state, props) => {
 
   return {
     messages: state.messagesReducer[id] || [],
-    // @TODO проверить селектор value
+    value:
+      state.conversationsReducer.find(
+        (conversation) => conversation.title === id,
+      )?.value || "",
   }
 }
 
 const mapDispachToProps = (dispatch) => ({
   sendMessage: (params) => dispatch(sendMessage(params)),
-  // @TODO добавить changeValue action
+  changeValue: (id, value) => dispatch(changeValue(id, value)),
 })
 
 export const MessageList = connect(

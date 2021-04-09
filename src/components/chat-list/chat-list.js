@@ -2,10 +2,9 @@ import { List, Button } from "@material-ui/core"
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
-import { AddContactModal } from "../modal"
+import { AddContactModal } from "../add-contact-modal"
 import { Chat } from "./chat"
 
-// @TODO пофиксить пропсы
 export class ChatListView extends Component {
   state = {
     isOpen: false,
@@ -18,7 +17,7 @@ export class ChatListView extends Component {
   }
 
   render() {
-    const { conversations, match } = this.props
+    const { conversations, match, messages } = this.props
     const { isOpen } = this.state
     const { id } = match.params
 
@@ -27,17 +26,26 @@ export class ChatListView extends Component {
         <div>
           <List component="nav">
             {conversations.map((chat) => {
+              const msg = messages[chat.title] || []
+
               return (
                 <Link key={chat.title} to={`/chat/${chat.title}`}>
-                  {/* @TODO * добавить отображение последнего сообщения () по желанию */}
-                  <Chat selected={chat.title === id} chat={chat} />
+                  <Chat
+                    selected={chat.title === id}
+                    chat={chat}
+                    lastMessage={msg[msg.length - 1]}
+                  />
                 </Link>
               )
             })}
           </List>
         </div>
 
-        <AddContactModal isOpen={isOpen} onClose={this.toggleModal} />
+        <AddContactModal
+          isOpen={isOpen}
+          onClose={this.toggleModal}
+          conversations={conversations}
+        />
 
         <Button variant="contained" fullWidth={true} onClick={this.toggleModal}>
           Добавить чат
@@ -49,7 +57,7 @@ export class ChatListView extends Component {
 
 const mapStateToProps = (state) => ({
   conversations: state.conversationsReducer,
-  // @TODO - достать сообщения из стора, что бы можно было отобразить последнее сообщение в карточке
+  messages: state.messagesReducer,
 })
 
 export const ChatList = connect(mapStateToProps, null)(ChatListView)
