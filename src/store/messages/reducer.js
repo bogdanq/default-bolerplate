@@ -1,25 +1,52 @@
-import { MESSAGE_SEND } from "./types"
+import {
+  MESSAGE_SEND,
+  GET_MESSAGE_ERROR,
+  GET_MESSAGE_SUCCESS,
+  GET_MESSAGE_PENDING,
+} from "./types"
 
 const initialState = {
-  room1: [
-    { author: "User", message: "test!", createdTs: new Date() },
-    { author: "Bot", message: "Привет, я бот!", createdTs: new Date() },
-  ],
+  messages: {},
+  messagesPending: false,
+  error: null,
 }
-
+// @TODO переделать с createReducer
 export const messagesReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case MESSAGE_SEND:
       return {
         ...state,
-        [payload.roomId]: [
-          ...(state[payload.roomId] || []),
-          {
-            author: payload.author,
-            message: payload.message,
-            createdTs: new Date(),
-          },
-        ],
+        messages: {
+          ...state.messages,
+          [payload.roomId]: [
+            ...(state.messages[payload.roomId] || []),
+            {
+              author: payload.author,
+              message: payload.message,
+              createdTs: new Date(),
+            },
+          ],
+        },
+      }
+    case GET_MESSAGE_PENDING:
+      return {
+        ...state,
+        messagesPending: true,
+      }
+    case GET_MESSAGE_SUCCESS:
+      return {
+        ...state,
+        messagesPending: false,
+        messages: {
+          ...state.messages,
+          [payload.roomId]: payload.messages,
+        },
+      }
+    case GET_MESSAGE_ERROR:
+      return {
+        ...state,
+        messagesPending: false,
+        error: payload,
       }
     default:
       return state

@@ -1,8 +1,10 @@
-import { connectRouter } from "connected-react-router"
+import { connectRouter, routerMiddleware } from "connected-react-router"
 import { createBrowserHistory } from "history"
 import { combineReducers, createStore, applyMiddleware, compose } from "redux"
 import { persistReducer, persistStore } from "redux-persist"
 import storage from "redux-persist/lib/storage"
+import thunk from "redux-thunk"
+import { request } from "../api"
 import { conversationsReducer } from "./conversations"
 import { messagesReducer } from "./messages"
 import { botSendMessage, logger } from "./middlewares"
@@ -28,7 +30,12 @@ export const store = createStore(
     }),
   ),
   compose(
-    applyMiddleware(botSendMessage, logger),
+    applyMiddleware(
+      thunk.withExtraArgument(request),
+      routerMiddleware(history),
+      botSendMessage,
+      logger,
+    ),
     window.__REDUX_DEVTOOLS_EXTENSION__
       ? window.__REDUX_DEVTOOLS_EXTENSION__()
       : () => {},

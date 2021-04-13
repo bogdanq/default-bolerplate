@@ -1,13 +1,12 @@
 import classNames from "classnames"
-// import { format } from "date-fns"
+import { format } from "date-fns"
 import React, { Component } from "react"
 import styles from "./message.module.css"
 
 export class Message extends Component {
   render() {
     const {
-      // @TODO пофиксить дату
-      message: { message, author },
+      message: { message, author, createdTs },
     } = this.props
 
     return (
@@ -18,7 +17,7 @@ export class Message extends Component {
       >
         <p>{author}</p>
         <h3>{message}</h3>
-        {/* <p>{format(createdTs, "HH:mm:ss")}</p> */}
+        <p>{format(new Date(createdTs), "HH:mm:ss")}</p>
       </div>
     )
   }

@@ -25,7 +25,6 @@ export class ChatPage extends Component {
         <Route path={["/chat/:id", "/chat"]}>
           {(params) => (
             <>
-              {/* @TODO удалили провайдер, потому что вся логика в redux */}
               <Layout header={<Header />} chats={<ChatList {...params} />}>
                 <Route path="/chat/:id">
                   <MessageList {...params} />
