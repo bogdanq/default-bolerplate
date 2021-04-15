@@ -1,0 +1,51 @@
+{
+  "short_name": "Geekchat",
+  "name": "Geekbrains chat",
+  "icons": [
+    {
+      "src": "/manifest/p1.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/manifest/p2.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/manifest/p3.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "/manifest/p4.jpg",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "/manifest/p5.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "/manifest/p6.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "/manifest/p7.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/manifest/p8.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#7ACCE5",
+  "theme_color": "#7ACCE5",
+  "orientation": "any",
+  "display": "standalone"
+}

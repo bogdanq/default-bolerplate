@@ -12,9 +12,39 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
     />
+    <link rel="manifest" href="../manifest/manifest.json" />
     <title>title</title>
   </head>
   <body>
     <div id="root"></div>
   </body>
+
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker
+          .register("/service-worker.js", {
+            scope: ".", // <--- THIS BIT IS REQUIRED
+          })
+          .then(
+            function (registration) {
+              // Registration was successful
+              console.log(
+                "ServiceWorker успешно зарегистрирован со сферой действия: ",
+                registration.scope,
+              )
+            },
+            function (err) {
+              // registration failed :(
+              console.log("ServiceWorker не удалось зарегистрировать: ", err)
+            },
+          )
+          .catch(function (err) {
+            console.log(err)
+          })
+      })
+    } else {
+      console.log("ServiceWorker не поддерживается")
+    }
+  </script>
 </html>

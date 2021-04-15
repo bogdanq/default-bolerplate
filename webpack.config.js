@@ -2,7 +2,7 @@ const path = require("path")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const { CleanWebpackPlugin } = require("clean-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
-// const CopyWebpackPlugin = require("copy-webpack-plugin")
+const CopyWebpackPlugin = require("copy-webpack-plugin")
 const OptimizeCssAssetWebpackPlugin = require("optimize-css-assets-webpack-plugin")
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin")
 
@@ -48,15 +48,19 @@ module.exports = {
       ignoreOrder: false,
     }),
     new CleanWebpackPlugin(),
-    // new CopyWebpackPlugin({
-    //   // просто скопирует код из папки в папку без изменений
-    //   patterns: [
-    //     {
-    //       from: path.resolve(__dirname, "src/assets"),
-    //       to: path.resolve(__dirname, "dist/assets"),
-    //     },
-    //   ],
-    // }),
+    new CopyWebpackPlugin({
+      // просто скопирует код из папки в папку без изменений
+      patterns: [
+        {
+          from: path.resolve(__dirname, "service-worker.js"),
+          to: path.resolve(__dirname, "dist/service-worker.js"),
+        },
+        {
+          from: path.resolve(__dirname, "manifest"),
+          to: path.resolve(__dirname, "dist/manifest"),
+        },
+      ],
+    }),
     isDevelopment
       ? () => ({})
       : new ImageMinimizerPlugin({
