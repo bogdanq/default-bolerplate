@@ -55,6 +55,7 @@ self.addEventListener("install", function (event) {
 // })
 
 self.addEventListener("fetch", function (event) {
+  console.log("fetch", event.request)
   event.respondWith(
     (async function () {
       if (!(event.request.url.indexOf("http") === 0)) {

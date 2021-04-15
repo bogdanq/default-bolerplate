@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HelloTest component snapshot 1`] = `
+<h1
+  data-testid="h1"
+>
+  Hello, 
+  Test
+</h1>
+`;

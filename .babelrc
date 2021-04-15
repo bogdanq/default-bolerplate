@@ -3,7 +3,7 @@
     [
       "@babel/preset-env",
       {
-        "modules": false,
+        "modules": "commonjs",
         "loose": true
       }
     ],
@@ -11,6 +11,7 @@
   ],
   // для того, что бы использовать експерементальный синтаксис классов
   "plugins": [
+    "@babel/plugin-syntax-dynamic-import",
     ["@babel/plugin-transform-runtime", { "regenerator": true }],
     "@babel/plugin-proposal-class-properties"
   ]
