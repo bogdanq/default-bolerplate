@@ -1,9 +1,12 @@
+const bodyParser = require("body-parser")
 const cors = require("cors")
 const express = require("express")
 
 const server = express()
 
 server.use(cors())
+server.use(bodyParser.json())
+server.use(bodyParser.urlencoded({ extended: true }))
 
 const conversations = [
   { title: "room1", value: "" },
@@ -32,7 +35,20 @@ const getMessagesById = (request, response) => {
   response.status(200).send({ messages: messages[id] || [], roomId: id })
 }
 
+const sendMessage = (req, rs) => {
+  const { message, author, roomId } = req.body
+
+  // author обычно не передают, потому что на беке в сессии он есть и так
+  messages[roomId].push({ message, author, createdTs: new Date() })
+
+  // или вернуть boolean
+  // можно вернуть только новое сообщение или все сообщения комнаты
+  rs.status(200).send(messages[roomId])
+}
+
+server.post("/send-message", sendMessage)
 server.get("/conversations", getConversations)
 server.get("/messages/:id", getMessagesById)
+server.de
 
 server.listen("8000", () => console.log("port 8000"))

@@ -161,11 +161,17 @@ module.exports = {
         exclude: /node_modules/,
         use: ["babel-loader"],
       },
+      {
+        test: /\.ts(x?)$/,
+        exclude: /node_modules/,
+        include: path.resolve(__dirname, "src"),
+        use: ["babel-loader"],
+      },
     ],
   },
   resolve: {
     modules: ["node_modules"],
-    extensions: [".js", ".jsx"],
+    extensions: [".ts", ".tsx", ".js", ".jsx"],
     alias: {
       "@app": path.resolve(__dirname, "src/"),
       "@redux": path.resolve(__dirname, "src/redux"),

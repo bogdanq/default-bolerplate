@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": false,
+    "jsx": "preserve",
+    "lib": ["es6", "dom", "ES2017"],
+    "moduleResolution": "node",
+    "noEmit": true,
+    "strict": true,
+    "target": "esnext",
+    "baseUrl": "./",
+    "types": ["node"],
+    "allowUnreachableCode": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  },
+  "node": true,
+  "exclude": ["node_modules", "dist"],
+  "include": ["src", "typings.d.ts"],
+  "compileOnSave": false
+}

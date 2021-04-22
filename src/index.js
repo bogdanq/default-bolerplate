@@ -8,10 +8,13 @@ import { PersistGate } from "redux-persist/integration/react"
 import { ChatPage } from "./pages/chat"
 import { store, persistor, history } from "./store"
 import "./index.css"
+import { foo } from "./utils/foo"
 
 const dark = {
   color: "red",
 }
+
+console.log("foo(1,2)", foo(1, 2))
 
 const theme = createMuiTheme(dark)
 
